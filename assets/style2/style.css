@@ -1,0 +1,65 @@
+#header_wrapper{
+  background: url("body_bg.png") repeat-x;
+}
+a:hover{
+	color: #000;
+}
+body{
+  color:#666;
+}
+#sidebar1 .sidebar.nav-left{
+  color:#aaa;
+}
+#main .page2{
+  background-color:#3f3f3f;
+}
+#footer_wrapper{
+  background-color:#343434;
+}
+
+#header .logo_wrapper .site_name{
+	color:#fff;
+}
+#header .logo_wrapper  .site_slogan{
+	color:#939393;
+}
+#header .nav li a:hover{
+  color:#fff;
+}
+#header .nav2 a{
+    color:#fff;
+}
+#sidebar1 {
+  border-right:1px solid #808080;
+}
+#sidebar1 .nav-left .active a,
+.nav-left li a:hover {
+	color:#000;
+	background-color:#fff;
+}
+#product .description a {
+}
+#product .description a:hover{
+}
+#collection {
+  color:#aaa;
+}
+#collection .title a
+{
+	color:#9c9c9c;
+}
+#collection .title a:hover{
+	color:#fff;
+}
+.connect_widget td.connect_widget_vertical_center{
+  color:#fff;
+}
+#message .toppic,
+#blog .toppic,
+#discussion .toppic,
+#page .toppic{
+  color:#333;
+}
+#blog .padding .details a:hover{
+  color:#000;
+}

@@ -1,0 +1,114 @@
+<div id="sidebar1">
+   <div class="sidebar_wrapper">
+      
+          <div class="sidebar banner_wrapper">
+            [%- if linklists.sidebar.links.size %]
+            <ul>
+              [%- foreach link in linklists.sidebar.links %]
+              [%- link.name = link.name | html %]
+              <li>[% link.featured_image.src | image_uri | image_tag | link_to (link.uri, link.name, link.target) %]</li>
+              [%- end %]
+            </ul>
+            [%- end %]
+          </div>      
+    
+          [%- if linklists.${settings.linklist_sidebar1}.links  %]
+          <div class="sidebar collection nav-left">
+            <h2 class="topic" title="[%- linklists.${settings.linklist_sidebar1}.name %]"><span>[%- linklists.${settings.linklist_sidebar1}.name %]</span></h2>
+            <ul class="list">
+              [%- foreach link in linklists.${settings.linklist_sidebar1}.links %]
+              <li>[% link.name | html | link_to (link.uri, link.name) %]</li>
+              [%- end %]
+            </ul>
+          </div>
+          [%- end %]
+
+         [%- if !settings.collection_enabled %]
+          <div class="sidebar collection nav-left">
+            <h2 class="topic" title="[% 'Browse by Collection' | loc %]">[% 'Browse by Collection' | loc %]</h2>
+            [%- if linklists.collections.links %]
+            <ul>
+              [%- foreach link in linklists.collections.links %]
+              <li>[% link.name | html | link_to (link.uri, link.name) %]</li>
+              [%- end %]
+            </ul>
+            [%- else %]
+            <p>คุณต้องเพิ่มคอลเลคชันสินค้าเข้าลิงค์ลิสต์แฮนเดิล "collections"</p>
+            [%- end %]
+          </div>          
+          [%- end %]
+
+          [%- if settings.type_style && collection.handle && collection.handle != 'all' %]
+          <div class="sidebar type nav-left">
+            <h2 class="topic" title="[% 'Browse by Type' | loc %]"><span>[% 'Browse by Type' | loc %]</span></h2>
+              [%- if !settings.type_style || settings.type_style == 1 %]
+              <form action="[% req.url %]" method="get">
+                <select name="type" class="select" onchange='location.href=this.form.type.options[this.form.type.selectedIndex].value;'>
+                  <option value="[% collection.uri %]">- [% 'Any type' | loc %] -</option>
+                  [%- foreach type in collection.types %]
+                    <option value="[% uri_for ('/collection', collection.slug, {type = type}) %]" [% 'selected="selected"' if current_type == type %]>[% type | html %]</option>
+                  [%- end %]
+                </select>
+              </form>
+              [%- else %]
+              <ul class="list">
+                [%- foreach type in collection.types %]
+                  <li [% 'class="active"' if current_type == type %]>[% type | html | link_to uri_for ('/collection', collection.slug, {type = type}) %]</li>
+                [%- end %]
+              </ul>
+              [%- end %]
+          </div>  
+          [%- end %]         
+         
+      
+         [%- if settings.brand_style && collection.handle && collection.handle != 'all' %]
+          <div class="sidebar brand nav-left">
+            <h2 class="topic" title="[% 'Browse by Brand' | loc %]"><span>[% 'Browse by Brand' | loc %]</span></h2>
+              [%- if !settings.brand_style || settings.brand_style == 1 %]
+              <form action="[% req.url %]" method="get">
+                <select name="brand" class="select" onchange='location.href=this.form.brand.options[this.form.brand.selectedIndex].value;'>
+                  <option value="[% collection.uri %]">- [% 'Any brand' | loc %] -</option>
+                  [%- foreach vendor in collection.vendors %]
+                    <option value="[% uri_for ('/collection', collection.slug, {vendor = vendor}) %]" [% 'selected="selected"' if current_vendor == vendor %]>[% vendor | html %]</option>
+                  [%- end %]
+                </select>
+              </form>
+              [%- else %]
+              <ul class="list">
+               [%- foreach vendor in collection.vendors %]
+                 <li [% 'class="active"' if current_vendor == vendor %]>[% vendor | html | link_to uri_for ('/collection', collection.slug, {vendor = vendor}) %]</li>
+               [%- end %]
+              </ul>
+              [%- end %]
+          </div>
+          [%- end %]
+
+          [%- if linklists.${settings.linklist_sidebar2}.links %]
+          <div class="sidebar collection nav-left">
+            <h2 class="topic" title="[%- linklists.${settings.linklist_sidebar2}.name %]"><span>[%- linklists.${settings.linklist_sidebar2}.name %]</span></h2>
+            <ul class="list">
+              [%- foreach link in linklists.${settings.linklist_sidebar2}.links %]
+              <li>[% link.name | html | link_to (link.uri, link.name) %]</li>
+              [%- end %]
+            </ul>
+          </div>
+          [%- end %]
+          [%- if linklists.${settings.linklist_sidebar3}.links %]
+          <div class="sidebar collection nav-left">
+            <h2 class="topic" title="[%- linklists.${settings.linklist_sidebar3}.name %]"><span>[%- linklists.${settings.linklist_sidebar3}.name %]</span></h2>
+            <ul class="list">
+              [%- foreach link in linklists.${settings.linklist_sidebar3}.links %]
+              <li>[% link.name | html | link_to (link.uri, link.name) %]</li>
+              [%- end %]
+            </ul>
+          </div>
+          [%- end %]          
+   
+         [%- if settings.facebook_uri && settings.like_box_enabled %]
+         <div class="sidebar facebook_like_box">
+           <iframe src="http://www.facebook.com/plugins/likebox.php?href=[% settings.facebook_uri | uri %]&amp;width=190&amp;colorscheme=light&amp;border_color=%23dddddd&amp;show_faces=[% settings.like_box_show_faces ? 'true' : 'false' %]&amp;stream=[% settings.like_box_show_stream ? 'true' : 'false' %]&amp;header=[% settings.like_box_show_header ? 'true' : 'false' %]&amp;height=[% settings.like_box_height ? settings.like_box_height : '556' %]" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:190px; height:[% settings.like_box_height ? settings.like_box_height : '556' %]px;"></iframe>
+         </div>
+         [%- end %]    
+      
+    </div>
+  </div>
